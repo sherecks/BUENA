@@ -1,0 +1,101 @@
+body {
+  background-color: #ffffff;
+  margin: 0px auto;
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #ffffff;
+}
+
+.artgtext1 {
+  opacity: 0.8;
+  font-size: 32px;
+  font-family: "Instrument Sans", sans-serif;
+  margin: 0;
+  color: rgb(0, 0, 0);
+  text-shadow: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  gap: 20px;
+}
+
+.image-wrapper {
+  flex: 0 0 calc(33.333% - 20px);
+  max-width: calc(33.333% - 20px);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.download-btn {
+  font-family: "Instrument Sans", sans-serif;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #e0e0e0;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+header ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+header ul li {
+  display: inline;
+}
+
+header ul li a {
+  font-family: "Instrument Sans", sans-serif;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+}
+
+header ul li a:hover {
+  opacity: 0.8;
+}
+
+#preloader {
+  background: #000;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  margin: 0px auto;
+}
+
+@media (max-width: 999px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+  ul li {
+    font-size: 40px;
+  }
+}/*# sourceMappingURL=stylegallery.css.map */

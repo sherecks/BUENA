@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+    <head>
+        <link rel="stylesheet" href="static/stylegallery.css" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+        <title>Galeria Buena</title>
+        <script src="https://kit.fontawesome.com/0db4c44db2.js" crossorigin="anonymous"></script>
+        <meta property="og:type" content="website" />
+    </head>
+
+    <div id="preloader">
+        <img class="VideoLoader" preload="auto" src="images/BBB.png"> 
+    </div>
+    
+    <header>
+        <p class="artgtext1">Buena Vibra</p>  
+        <ul>
+            <li><a href="#"><i>Voltar</i></a></li> 
+        </ul>
+    </header>
+ 
+    <br/>
+
+    <main>
+        <p class="artgtext1"> Galeria de Fotos </p>
+        <p class="artgtext1">BuenaSavage 26/09</p>
+
+        <div class="image-container" id="imageContainer"></div>
+
+        <script src="imageIds.js"></script>
+
+        <script>
+
+            const imageContainer = document.getElementById('imageContainer');
+
+            function createImageUrl(fileId) {
+                return `https://lh3.googleusercontent.com/d/${fileId}`;
+            }
+
+            function createDownloadUrl(fileId) {
+                return `https://drive.google.com/uc?export=download&id=${fileId}`;
+            }
+
+            // Cria o bloco pra cada imagem!
+            imageIds.forEach(id => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'image-wrapper';
+
+                const img = document.createElement('img');
+                img.src = createImageUrl(id);
+                img.alt = `Image ${id}`;
+                wrapper.appendChild(img);
+
+                const downloadBtn = document.createElement('a');
+                downloadBtn.href = createDownloadUrl(id);
+                downloadBtn.className = 'download-btn';
+                downloadBtn.textContent = 'Baixar';
+                downloadBtn.download = `image_${id}`; // Nome da file pra foto!
+                wrapper.appendChild(downloadBtn);
+
+                imageContainer.appendChild(wrapper);
+            });
+        </script>
+       
+    </main>
+
+    <script>
+        var loaderer = document.getElementById("preloader");
+
+        window.addEventListener("load", function(){
+            loaderer.style.display = "none";
+        })
+    </script>
+    <script src="preloadImagens.js"></script> 
+    
+</body>
+
+</html>
