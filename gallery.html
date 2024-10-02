@@ -17,21 +17,16 @@
     </head>
 
     <div id="preloader">
-        <img class="VideoLoader" preload="auto" src="images/BBB.png"> 
+        <img class="VideoLoader" preload="auto" src="images/Buenavibra_logo_2.png"> 
     </div>
     
     <header>
-        <p class="artgtext1">Buena Vibra</p>  
-        <ul>
-            <li><a href="#"><i>Voltar</i></a></li> 
-        </ul>
+        <img class="photo-web" src="images/Buenavibra_logo_1.png">
+        <p class="artgtext1"> GALERIA DE FOTOS </p>
+        <p class="artgtext2">BUENA HALLOWEN 05/10</p>
     </header>
- 
-    <br/>
 
     <main>
-        <p class="artgtext1"> Galeria de Fotos </p>
-        <p class="artgtext1">BuenaSavage 26/09</p>
 
         <div class="image-container" id="imageContainer"></div>
 
@@ -62,8 +57,15 @@
                 const downloadBtn = document.createElement('a');
                 downloadBtn.href = createDownloadUrl(id);
                 downloadBtn.className = 'download-btn';
-                downloadBtn.textContent = 'Baixar';
                 downloadBtn.download = `image_${id}`; // Nome da file pra foto!
+
+                 // Criando a imagem para o botão de download
+                const downloadImg = document.createElement('img');
+                downloadImg.src = './images/Button1.png';  // Coloque o caminho da sua imagem aqui
+                downloadImg.alt = 'Download';
+                
+                // Adiciona a imagem como conteúdo do botão de download
+                downloadBtn.appendChild(downloadImg);
                 wrapper.appendChild(downloadBtn);
 
                 imageContainer.appendChild(wrapper);
@@ -79,7 +81,6 @@
             loaderer.style.display = "none";
         })
     </script>
-    <script src="preloadImagens.js"></script> 
     
 </body>
 
