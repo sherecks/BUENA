@@ -29,47 +29,88 @@
     <main>
 
         <div class="image-container" id="imageContainer"></div>
+        
+        <div class="pagination">
+            <button id="prevButton" disabled>Anterior</button>
+            <span id="pageInfo"></span>
+            <button id="nextButton">Próximo</button>
+        </div>
 
         <script src="imageIds.js"></script>
 
         <script>
-
             const imageContainer = document.getElementById('imageContainer');
-
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const pageInfo = document.getElementById('pageInfo');
+            const imagesPerPage = 10; // Número de imagens por página
+            let currentPage = 1; // Página atual
+            
             function createImageUrl(fileId) {
-                return `https://lh3.googleusercontent.com/d/${fileId}`;
+                return `https://lh3.googleusercontent.com/d/${fileId}=s200`; // Define a largura da imagem como 200px
             }
-
+            
             function createDownloadUrl(fileId) {
                 return `https://drive.google.com/uc?export=download&id=${fileId}`;
             }
-
-            // Cria o bloco pra cada imagem!
-            imageIds.forEach(id => {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'image-wrapper';
-
-                const img = document.createElement('img');
-                img.src = createImageUrl(id);
-                img.alt = `Image ${id}`;
-                wrapper.appendChild(img);
-
-                const downloadBtn = document.createElement('a');
-                downloadBtn.href = createDownloadUrl(id);
-                downloadBtn.className = 'download-btn';
-                downloadBtn.download = `image_${id}`; // Nome da file pra foto!
-
-                 // Criando a imagem para o botão de download
-                const downloadImg = document.createElement('img');
-                downloadImg.src = './images/Button1.png';  // Coloque o caminho da sua imagem aqui
-                downloadImg.alt = 'Download';
-                
-                // Adiciona a imagem como conteúdo do botão de download
-                downloadBtn.appendChild(downloadImg);
-                wrapper.appendChild(downloadBtn);
-
-                imageContainer.appendChild(wrapper);
+            
+            function displayImages(page) {
+                imageContainer.innerHTML = ''; // Limpa o contêiner antes de adicionar novas imagens
+            
+                const start = (page - 1) * imagesPerPage; // Índice inicial
+                const end = start + imagesPerPage; // Índice final
+            
+                const paginatedImages = imageIds.slice(start, end); // Obtém o subconjunto de imagens para a página atual
+            
+                paginatedImages.forEach(id => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'image-wrapper';
+            
+                    const img = document.createElement('img');
+                    img.src = createImageUrl(id);
+                    img.alt = `Image ${id}`;
+                    img.loading = 'lazy';
+            
+                    const downloadBtn = document.createElement('a');
+                    downloadBtn.href = createDownloadUrl(id);
+                    downloadBtn.className = 'download-btn';
+                    downloadBtn.download = `image_${id}`;
+            
+                    const downloadImg = document.createElement('img');
+                    downloadImg.src = './images/Button1.png'; // Coloque o caminho da sua imagem aqui
+                    downloadImg.alt = 'Download';
+            
+                    downloadBtn.appendChild(downloadImg);
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(downloadBtn);
+            
+                    imageContainer.appendChild(wrapper);
+                });
+            
+                // Atualiza a informação da página e o estado dos botões
+                pageInfo.textContent = `Página ${page} de ${Math.ceil(imageIds.length / imagesPerPage)}`;
+                prevButton.disabled = page === 1; // Desabilita o botão "Anterior" na primeira página
+                nextButton.disabled = page === Math.ceil(imageIds.length / imagesPerPage); // Desabilita o botão "Próximo" na última página
+            }
+            
+            // Adiciona event listeners aos botões de paginação
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayImages(currentPage);
+                }
             });
+            
+            nextButton.addEventListener('click', () => {
+                if (currentPage < Math.ceil(imageIds.length / imagesPerPage)) {
+                    currentPage++;
+                    displayImages(currentPage);
+                }
+            });
+            
+            // Exibe a primeira página ao carregar
+            displayImages(currentPage);
+
         </script>
        
     </main>

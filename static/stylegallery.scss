@@ -58,7 +58,7 @@ header {
 }
 .image-wrapper {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     max-width: 28%;
     align-items: center;
     margin-bottom: 4px;
@@ -80,6 +80,7 @@ header {
     color: rgb(0, 0, 0);
     text-decoration: none;
     border-radius: 5px;
+    text-align: center;
 }
 
 .download-btn img {
@@ -89,6 +90,20 @@ header {
 
 .download-btn img:hover {
     opacity: 0.8;
+}
+
+button, span{
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 10px;
+    font-family: "Instrument Sans", sans-serif;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .VideoLoader{
