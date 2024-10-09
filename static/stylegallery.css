@@ -7,7 +7,8 @@ body::-webkit-scrollbar {
 }
 
 body {
-  background-color: #ffffff;
+  background-image: url(/images/padrao.png);
+  background-color: #1a1a1a;
   margin: 0px auto;
 }
 
@@ -17,31 +18,16 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 2px 8px;
-  background-color: #ffffff;
 }
 
 .artgtext1 {
   opacity: 0.8;
-  font-size: 26px;
+  font-size: 36px;
   font-family: "Instrument Sans", sans-serif;
   font-weight: 400;
   letter-spacing: 8px;
   margin: 0;
-  color: rgb(31, 31, 31);
-  text-shadow: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-}
-
-.artgtext2 {
-  opacity: 0.8;
-  font-size: 20px;
-  font-family: "Instrument Sans", sans-serif;
-  font-weight: 400;
-  letter-spacing: 4px;
-  margin: 0;
-  color: rgb(31, 31, 31);
+  color: rgb(255, 255, 255);
   text-shadow: none;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -49,7 +35,7 @@ header {
 }
 
 .photo-web {
-  width: 12%;
+  width: 6%;
   margin: 0 auto;
 }
 
@@ -83,17 +69,16 @@ header {
   font-family: "Instrument Sans", sans-serif;
   display: inline-block;
   margin-top: 4px;
-  padding: 5px 10px;
-  background-color: #ffffff;
+  padding: 10px;
   color: rgb(0, 0, 0);
   text-decoration: none;
   border-radius: 5px;
-  text-align: center;
+  text-align: left;
 }
 
 .download-btn img {
-  width: 20%;
-  transition: transform all 0.6s ease;
+  width: 10%;
+  filter: invert(1);
 }
 
 .download-btn img:hover {
@@ -101,10 +86,13 @@ header {
 }
 
 button, span {
+  color: white;
   padding: 10px 15px;
   cursor: pointer;
   margin: 10px;
   font-family: "Instrument Sans", sans-serif;
+  background-color: #525252;
+  border-radius: 10px;
 }
 
 .pagination {
@@ -122,7 +110,7 @@ button, span {
 }
 
 #preloader {
-  background: #eeeeee;
+  background: #636363;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -142,7 +130,6 @@ button, span {
     max-width: 40%;
   }
   .download-btn img {
-    width: 40%;
-    transition: transform all 0.6s ease;
+    width: 10%;
   }
 }/*# sourceMappingURL=stylegallery.css.map */

@@ -20,9 +20,7 @@
     </div>
     
     <header>
-        <img class="photo-web" src="images/Buenavibra_logo_1.png">
         <p class="artgtext1"> GALERIA DE FOTOS </p>
-        <p class="artgtext2">BUENA</p>
     </header>
 
     <main>
@@ -80,7 +78,7 @@
                 downloadBtn.download = `image_${id}`;
         
                 const downloadImg = document.createElement('img');
-                downloadImg.src = './images/Button1.png';
+                downloadImg.src = './images/download-direto.png';
                 downloadImg.alt = 'Download';
         
                 downloadBtn.appendChild(downloadImg);
@@ -161,6 +159,14 @@
             window.addEventListener("load", function(){
                 hidePreloader();
             });
+        </script>
+
+        <script>
+            var loader = document.getElementById("preloader");
+
+            window.addEventListener("load", function(){
+                loader.style.display = "none";
+            })
         </script>
        
     </main>
