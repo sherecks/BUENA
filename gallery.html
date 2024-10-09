@@ -10,7 +10,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
         <meta charset="UTF-8" />
-        <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
         <title>Galeria Buena</title>
         <script src="https://kit.fontawesome.com/0db4c44db2.js" crossorigin="anonymous"></script>
         <meta property="og:type" content="website" />
@@ -23,7 +22,7 @@
     <header>
         <img class="photo-web" src="images/Buenavibra_logo_1.png">
         <p class="artgtext1"> GALERIA DE FOTOS </p>
-        <p class="artgtext2">BUENA HALLOWEN 05/10</p>
+        <p class="artgtext2">BUENA</p>
     </header>
 
     <main>
@@ -43,85 +42,128 @@
             const prevButton = document.getElementById('prevButton');
             const nextButton = document.getElementById('nextButton');
             const pageInfo = document.getElementById('pageInfo');
-            const imagesPerPage = 10; // Número de imagens por página
-            let currentPage = 1; // Página atual
+            const preloader = document.getElementById('preloader');
+            const imagesPerPage = 10;
+            let currentPage = 1;
+            let isLoading = false;
             
             function createImageUrl(fileId) {
-                return `https://lh3.googleusercontent.com/d/${fileId}=s200`; // Define a largura da imagem como 200px
+                return `https://lh3.googleusercontent.com/d/${fileId}=s400`;
             }
             
             function createDownloadUrl(fileId) {
                 return `https://drive.google.com/uc?export=download&id=${fileId}`;
             }
-            
+
+            function showPreloader() {
+                preloader.style.display = "block";
+                isLoading = true;
+            }
+
+            function hidePreloader() {
+                preloader.style.display = "none";
+                isLoading = false;
+            }
+
+            function createImageElement(id) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'image-wrapper';
+        
+                const img = document.createElement('img');
+                img.src = createImageUrl(id);
+                img.alt = `Image ${id}`;
+                img.loading = 'lazy';
+        
+                const downloadBtn = document.createElement('a');
+                downloadBtn.href = createDownloadUrl(id);
+                downloadBtn.className = 'download-btn';
+                downloadBtn.download = `image_${id}`;
+        
+                const downloadImg = document.createElement('img');
+                downloadImg.src = './images/Button1.png';
+                downloadImg.alt = 'Download';
+        
+                downloadBtn.appendChild(downloadImg);
+                wrapper.appendChild(img);
+                wrapper.appendChild(downloadBtn);
+                
+                return wrapper;
+            }
+
             function displayImages(page) {
-                imageContainer.innerHTML = ''; // Limpa o contêiner antes de adicionar novas imagens
-            
-                const start = (page - 1) * imagesPerPage; // Índice inicial
-                const end = start + imagesPerPage; // Índice final
-            
-                const paginatedImages = imageIds.slice(start, end); // Obtém o subconjunto de imagens para a página atual
-            
+                if (isLoading) return; // Prevent multiple loads
+
+                showPreloader();
+                
+                // Clear current images
+                imageContainer.innerHTML = '';
+                
+                const start = (page - 1) * imagesPerPage;
+                const end = start + imagesPerPage;
+                const paginatedImages = imageIds.slice(start, end);
+                
+                let loadedImages = 0;
+                const totalImages = paginatedImages.length;
+
                 paginatedImages.forEach(id => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'image-wrapper';
-            
-                    const img = document.createElement('img');
-                    img.src = createImageUrl(id);
-                    img.alt = `Image ${id}`;
-                    img.loading = 'lazy';
-            
-                    const downloadBtn = document.createElement('a');
-                    downloadBtn.href = createDownloadUrl(id);
-                    downloadBtn.className = 'download-btn';
-                    downloadBtn.download = `image_${id}`;
-            
-                    const downloadImg = document.createElement('img');
-                    downloadImg.src = './images/Button1.png'; // Coloque o caminho da sua imagem aqui
-                    downloadImg.alt = 'Download';
-            
-                    downloadBtn.appendChild(downloadImg);
-                    wrapper.appendChild(img);
-                    wrapper.appendChild(downloadBtn);
-            
+                    const wrapper = createImageElement(id);
+                    const img = wrapper.querySelector('img');
+
+                    img.onload = () => {
+                        loadedImages++;
+                        if (loadedImages === totalImages) {
+                            hidePreloader();
+                        }
+                    };
+
+                    img.onerror = () => {
+                        loadedImages++;
+                        if (loadedImages === totalImages) {
+                            hidePreloader();
+                        }
+                    };
+
                     imageContainer.appendChild(wrapper);
                 });
-            
-                // Atualiza a informação da página e o estado dos botões
+
+                // Update pagination info
                 pageInfo.textContent = `Página ${page} de ${Math.ceil(imageIds.length / imagesPerPage)}`;
-                prevButton.disabled = page === 1; // Desabilita o botão "Anterior" na primeira página
-                nextButton.disabled = page === Math.ceil(imageIds.length / imagesPerPage); // Desabilita o botão "Próximo" na última página
+                prevButton.disabled = page === 1;
+                nextButton.disabled = page === Math.ceil(imageIds.length / imagesPerPage);
+
+                // Fallback to hide preloader if images don't load within 5 seconds
+                setTimeout(() => {
+                    if (isLoading) {
+                        hidePreloader();
+                    }
+                }, 5000);
             }
             
-            // Adiciona event listeners aos botões de paginação
+            // Add event listeners to pagination buttons
             prevButton.addEventListener('click', () => {
-                if (currentPage > 1) {
+                if (currentPage > 1 && !isLoading) {
                     currentPage--;
                     displayImages(currentPage);
                 }
             });
             
             nextButton.addEventListener('click', () => {
-                if (currentPage < Math.ceil(imageIds.length / imagesPerPage)) {
+                if (currentPage < Math.ceil(imageIds.length / imagesPerPage) && !isLoading) {
                     currentPage++;
                     displayImages(currentPage);
                 }
             });
             
-            // Exibe a primeira página ao carregar
+            // Initial load
             displayImages(currentPage);
-
+            
+            // Hide initial preloader after first page load
+            window.addEventListener("load", function(){
+                hidePreloader();
+            });
         </script>
        
     </main>
-
-    <script>
-        var loaderer = document.getElementById("preloader");
-
-        window.addEventListener("load", function(){
-            loaderer.style.display = "none";
-        })
-    </script>
     
 </body>
 

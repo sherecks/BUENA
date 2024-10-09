@@ -59,7 +59,7 @@ def get_image_ids(service, folder_id):
         results = service.files().list(
             q=f"'{folder_id}' in parents and mimeType contains 'image/' and trashed=false",
             spaces='drive',
-            pageSize=20,  # Adjust this value as needed
+            pageSize=160,  # Adjust this value as needed
             fields="nextPageToken, files(id, name)"
         ).execute()
         items = results.get("files", [])
