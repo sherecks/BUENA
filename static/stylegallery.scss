@@ -38,40 +38,29 @@ header {
 }
 
 .image-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 6px auto;
-    gap: 20px;
+    column-count: 3;
+    margin: 10px;
 }
+
 .image-wrapper {
-    display: flex;
-    flex-direction: column;
-    max-width: 28%;
-    align-items: center;
-    margin-bottom: 4px;
-    text-align: center;
+    margin: 4px;
 }
-.image-wrapper img {
+
+img {
     width: 100%;
-    margin: 4px auto;
+    margin: 4px;
     border-radius: 10px;
-    height: auto;
-    object-fit: cover;
 }
+
 .download-btn {
     font-family: "Instrument Sans", sans-serif;
-    display: inline-block;
-    margin-top: 4px;
     padding: 10px;
-    color: rgb(0, 0, 0);
     text-decoration: none;
-    border-radius: 5px;
     text-align: left;
 }
 
 .download-btn img {
-    width: 10%;
+    width: 8%;
     filter: invert(1);
 }
 
@@ -122,12 +111,20 @@ button, span{
         margin: 0 auto; 
     }
 
-    .image-wrapper {
-        max-width: 40%;
+    .image-container {
+        column-count: 2;
     }
 
     .download-btn img {
-        width: 10%;
+        width: 12%;
+    }
+
+    button, span{
+        font-size: 28px;
+    }
+
+    .artgtext1{
+        font-size: 48px;
     }
 
       
